@@ -87,7 +87,7 @@ $answers = 'A,A,B,A,D,C,D,A,A,C,C,D,C,D,A,B,C,D,C,D';
 $commits_arr = explode(',', $commits);
 $answers_arr = explode(',', $answers);
 
-$intersect = array_diff_assoc($commits_arr, $answers_arr);
+$intersect = array_intersect_assoc($commits_arr, $answers_arr);
 
 $score = count($intersect) * 5;
 
