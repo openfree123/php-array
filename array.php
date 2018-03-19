@@ -38,11 +38,8 @@ $urls = [];
 
 foreach ($items as $item)
 {
-    $url = $item[0];
-    $url_arr = explode('/', $url);
-    array_pop($url_arr);
-    array_push($url_arr, '');
-    $url = join('/', $url_arr);
+    $pos = strrpos($item[0], '/');
+    $url = substr($item[0], 0, $pos+1);
 
     if (isset($urls[$url])) {
         $urls[$url][0] = $url;
