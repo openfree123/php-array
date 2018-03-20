@@ -188,3 +188,29 @@ foreach ($arr as $v)
 
 //9、从m个数中选出n个数来 ( 0 < n <= m) ，要求n个数之间不能有重复，其和等于一个定值k，求一段程序，罗列所有的可能。
 //例如备选的数字是：11, 18, 12, 1, -2, 20, 8, 10, 7, 6 ，和k等于：18
+//思路：先求出所有子集，pow(2,10), 再转成10位的二进制，在于数字按照位置一一比较，是1的保留该位置数据，0的舍弃该位置数据
+//最终，求得1024个子集，在array_sum下，获取等于k的子集即可
+function sum($number, $k)
+{
+    $subset = [];
+    $count  = pow(2, count($number));
+    for ($i = 0; $i < $count; $i++) {
+        $item = [];
+        $binary_str = sprintf('%010d', decbin($i));
+        $binary_arr = str_split($binary_str, 1);
+        foreach ($binary_arr as $key => $binary)
+        {
+            if ('1' === $binary) {
+                $item[] = $number[$key];
+            }
+        }
+        if ($k === array_sum($item)) {
+            $subset[] = $item;
+        }
+    }
+    return $subset;
+}
+
+$number = [11, 18, 12, 1, -2, 20, 8, 10, 7, 6 ];
+$res = sum($number, 18);
+var_dump($res);
